@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Check Out</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#345d85;
+color:white;
+border:none;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Guest Check-Out</h2>
+
+<input type="text" id="guestName" placeholder="Guest Name">
+
+<input type="number" id="roomNo" placeholder="Room Number">
+
+<input type="date" id="checkoutDate">
+
+</button>
+
+<div id="billBox" style="margin-top:20px;"></div>
+
+<button onclick="checkOut()">
+Check Out
+</button>
+
+</div>
+
+<script>
+
+function checkOut(){
+
+let guestName =
+document.getElementById("guestName").value;
+
+let roomNo =
+document.getElementById("roomNo").value;
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+let newGuests = [];
+
+let found = false;
+
+for(let i=0; i<guests.length; i++){
+
+if(
+guests[i].name === guestName &&
+guests[i].room == roomNo
+){
+found = true;
+}
+else{
+newGuests.push(guests[i]);
+}
+
+}
+
+localStorage.setItem(
+"guests",
+JSON.stringify(newGuests)
+);
+
+if(found){
+alert("Check Out Successful");
+}
+else{
+alert("Guest Not Found");
+}
+
+}
+
+</script>
+
+</body>
+</html>

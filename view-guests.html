@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>View Guests</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:12px;
+text-align:center;
+}
+
+th{
+background:#003366;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>All Guests</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>Room</th>
+</tr>
+</thead>
+
+<tbody id="guestTable">
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+let table =
+document.getElementById("guestTable");
+
+guests.forEach(function(guest){
+
+table.innerHTML += `
+<tr>
+<td>${guest.name}</td>
+<td>${guest.phone}</td>
+<td>${guest.room}</td>
+<td>
+<button onclick="deleteGuest('${guest.name}')">
+Delete
+</button>
+</td>
+</tr>
+`;
+});
+
+function deleteGuest(name){
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+guests = guests.filter(
+guest => guest.name !== name
+);
+
+localStorage.setItem(
+"guests",
+JSON.stringify(guests)
+);
+
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>

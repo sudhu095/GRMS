@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Guest</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#003366;
+color:white;
+border:none;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Add Guest</h2>
+
+<input type="text" id="name" placeholder="Guest Name">
+
+<input type="text" id="phone" placeholder="Phone Number">
+
+<input type="number" id="room" placeholder="Room Number">
+
+<button onclick="saveGuest()">
+Save Guest
+</button>
+
+</div>
+
+<script>
+
+function saveGuest(){
+
+let guest = {
+name: document.getElementById("name").value,
+phone: document.getElementById("phone").value,
+room: document.getElementById("room").value
+};
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+guests.push(guest);
+
+localStorage.setItem(
+"guests",
+JSON.stringify(guests)
+);
+
+alert("Guest Saved Successfully");
+
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("room").value="";
+
+}
+
+</script>
+
+</body>
+</html>

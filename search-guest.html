@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Search Guest</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:20px;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#003366;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+padding:15px;
+background:#eef4ff;
+border-radius:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Search Guest</h2>
+
+<input type="text" id="searchName" placeholder="Enter Guest Name">
+
+<button onclick="searchGuest()">
+Search
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function searchGuest(){
+
+let searchName =
+document.getElementById("searchName").value.toLowerCase();
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+let result =
+document.getElementById("result");
+
+let found =
+guests.find(guest =>
+guest.name.toLowerCase().trim() === searchName.trim()
+);
+
+if(found){
+
+result.innerHTML = `
+<h3>Guest Found</h3>
+<p><b>Name:</b> ${found.name}</p>
+<p><b>Phone:</b> ${found.phone}</p>
+<p><b>Room:</b> ${found.room}</p>
+`;
+
+}else{
+
+result.innerHTML =
+"<h3>Guest Not Found</h3>";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

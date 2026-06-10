@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Room Status</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f6f9;
+padding:20px;
+}
+
+h1{
+text-align:center;
+margin-bottom:30px;
+color:#003366;
+}
+
+.rooms{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:15px;
+}
+
+.room{
+padding:20px;
+text-align:center;
+border-radius:10px;
+color:white;
+font-weight:bold;
+font-size:18px;
+}
+
+.available{
+background:green;
+}
+
+.occupied{
+background:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Room Status</h1>
+
+<div class="rooms" id="roomsContainer">
+
+</div>
+<script>
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+let occupiedRooms =
+guests.map(guest => guest.room);
+
+let container =
+document.getElementById("roomsContainer");
+
+for(let i=101; i<=120; i++){
+
+let roomDiv =
+document.createElement("div");
+
+roomDiv.classList.add("room");
+
+if(occupiedRooms.includes(i.toString())){
+
+roomDiv.classList.add("occupied");
+
+}else{
+
+roomDiv.classList.add("available");
+
+}
+
+roomDiv.innerText = "Room " + i;
+
+container.appendChild(roomDiv);
+
+}
+
+</script>
+
+</body>
+</html>

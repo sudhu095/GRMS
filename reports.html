@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reports</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h1{
+text-align:center;
+color:#003366;
+margin-bottom:20px;
+}
+
+.report-box{
+padding:15px;
+margin:10px 0;
+background:#eaf2ff;
+border-left:5px solid #003366;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Grand Royal Hotel Reports</h1>
+
+<div class="report-box">
+Total Rooms : <span id="totalRooms">20</span>
+</div>
+
+<div class="report-box">
+Total Guests : <span id="totalGuests">0</span>
+</div>
+
+<div class="report-box">
+Occupied Rooms : <span id="occupiedRooms">0</span>
+</div>
+
+<div class="report-box">
+Available Rooms : <span id="availableRooms">0</span>
+</div>
+
+<div class="report-box">
+Occupancy Rate : <span id="occupancyRate">0%</span>
+</div>
+
+</div>
+
+<script>
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+let totalGuests = guests.length;
+
+let occupiedRooms = guests.length;
+
+let availableRooms = 20 - occupiedRooms;
+
+document.getElementById("totalGuests").innerText =
+totalGuests;
+
+document.getElementById("occupiedRooms").innerText =
+occupiedRooms;
+
+document.getElementById("availableRooms").innerText =
+availableRooms;
+
+let occupancyRate =
+Math.round((occupiedRooms / 20) * 100);
+
+document.getElementById("occupancyRate").innerText =
+occupancyRate + "%";
+
+</script>
+
+</body>
+</html>
