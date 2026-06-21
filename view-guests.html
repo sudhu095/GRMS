@@ -41,7 +41,7 @@ color:white;
 
 <div class="container">
 
-<h2>All Guests</h2>
+<h2>View Guest</h2>
 
 <table>
 
@@ -49,7 +49,9 @@ color:white;
 <tr>
 <th>Name</th>
 <th>Phone</th>
+<th>Buildings</th>
 <th>Room</th>
+<th>Action</th>
 </tr>
 </thead>
 
@@ -74,6 +76,7 @@ table.innerHTML += `
 <tr>
 <td>${guest.name}</td>
 <td>${guest.phone}</td>
+<td>${guest.building || "Royal Tower"}</td>
 <td>${guest.room}</td>
 <td>
 <button onclick="deleteGuest('${guest.name}')">

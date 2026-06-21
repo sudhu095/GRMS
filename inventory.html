@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Inventory</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:20px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h1{
+text-align:center;
+color:#003366;
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:12px;
+text-align:center;
+}
+
+th{
+background:#003366;
+color:white;
+}
+
+.low{
+color:red;
+font-weight:bold;
+}
+
+.good{
+color:green;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Inventory Status</h1>
+
+<table>
+
+<tr>
+<th>Item</th>
+<th>Quantity</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Beds</td>
+<td>20</td>
+<td class="good">Available</td>
+</tr>
+
+<tr>
+<td>Chairs</td>
+<td>50</td>
+<td class="good">Available</td>
+</tr>
+
+<tr>
+<td>Fans</td>
+<td>18</td>
+<td class="good">Available</td>
+</tr>
+
+<tr>
+<td>AC Units</td>
+<td>15</td>
+<td class="low">Low Stock</td>
+</tr>
+
+<tr>
+<td>Tables</td>
+<td>25</td>
+<td class="good">Available</td>
+</tr>
+
+</table>
+
+</div>
+
+</body>
+</html>

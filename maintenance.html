@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Maintenance Ticket</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:20px;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+color:#003366;
+margin-bottom:20px;
+}
+
+input,textarea,select{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#003366;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+#result{
+margin-top:20px;
+padding:15px;
+background:#eef4ff;
+border-radius:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Raise Maintenance Ticket</h2>
+
+<input type="text"
+id="resident"
+placeholder="Resident Name">
+
+<input type="text"
+id="room"
+placeholder="Assigned Room">
+
+<textarea
+id="issue"
+placeholder="Enter Problem">
+</textarea>
+
+<button onclick="submitTicket()">
+Submit Ticket
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function submitTicket(){
+
+let resident =
+document.getElementById("resident").value;
+
+let room =
+document.getElementById("room").value;
+
+let issue =
+document.getElementById("issue").value;
+
+document.getElementById("result").innerHTML =
+`
+<h3>Ticket Raised Successfully</h3>
+
+<p><b>Resident:</b> ${resident}</p>
+
+<p><b>Room:</b> ${room}</p>
+
+<p><b>Issue:</b> ${issue}</p>
+
+<p><b>Status:</b> Pending</p>
+`;
+
+}
+
+</script>
+
+</body>
+</html>

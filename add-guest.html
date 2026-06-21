@@ -24,7 +24,7 @@ text-align:center;
 margin-bottom:20px;
 }
 
-input{
+input,select{
 width:100%;
 padding:10px;
 margin:10px 0;
@@ -52,6 +52,13 @@ cursor:pointer;
 
 <input type="text" id="phone" placeholder="Phone Number">
 
+<select id="building">
+<option value="">Select Building</option>
+<option value="Royal Tower">Royal Tower</option>
+<option value="Green Residency">Green Residency</option>
+<option value="Sunrise Block">Sunrise Block</option>
+</select>
+
 <input type="number" id="room" placeholder="Room Number">
 
 <button onclick="saveGuest()">
@@ -67,6 +74,7 @@ function saveGuest(){
 let guest = {
 name: document.getElementById("name").value,
 phone: document.getElementById("phone").value,
+building: document.getElementById("building").value,
 room: document.getElementById("room").value
 };
 
@@ -84,6 +92,7 @@ alert("Guest Saved Successfully");
 
 document.getElementById("name").value="";
 document.getElementById("phone").value="";
+document.getElementById("building").value="";
 document.getElementById("room").value="";
 
 }

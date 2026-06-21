@@ -19,7 +19,13 @@ border-radius:10px;
 box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
-input{
+h2{
+text-align:center;
+color:#003366;
+margin-bottom:20px;
+}
+
+input,select{
 width:100%;
 padding:10px;
 margin:10px 0;
@@ -33,6 +39,10 @@ color:white;
 border:none;
 cursor:pointer;
 }
+
+button:hover{
+background:#0055aa;
+}
 </style>
 
 </head>
@@ -41,15 +51,32 @@ cursor:pointer;
 
 <div class="container">
 
-<h2>Guest Check-In</h2>
+<h2>Resident Check In</h2>
 
-<input type="text" id="guestName" placeholder="Guest Name">
+<input type="text"
+id="guestName"
+placeholder="Resident Name">
 
-<input type="number" id="roomNo" placeholder="Room Number">
+<input type="number"
+id="roomNo"
+placeholder="Room Number">
 
-<input type="date" id="checkInDate">
+<input type="date"
+id="checkInDate">
 
-<div id="billBox" style="margin-top:20px;"></div>
+<h3>KYC Verification</h3>
+
+<select id="idType">
+<option value="">Select ID Proof</option>
+<option>Aadhaar Card</option>
+<option>PAN Card</option>
+<option>Passport</option>
+<option>Driving Licence</option>
+</select>
+
+<input type="file" id="idProof">
+
+<input type="file" id="photo">
 
 <button onclick="checkIn()">
 Check In
@@ -66,6 +93,9 @@ document.getElementById("guestName").value;
 
 let roomNo =
 document.getElementById("roomNo").value;
+
+let idType =
+document.getElementById("idType").value;
 
 let guests =
 JSON.parse(localStorage.getItem("guests")) || [];
@@ -85,10 +115,19 @@ break;
 }
 
 if(found){
-alert("Check In Successful");
+
+alert(
+"Check In Successful\n\n" +
+"Resident: " + guestName +
+"\nRoom: " + roomNo +
+"\nKYC Completed: " + idType
+);
+
 }
 else{
-alert("Guest Not Found");
+
+alert("Resident Not Found");
+
 }
 
 }
