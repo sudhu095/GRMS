@@ -423,17 +423,39 @@ if(found){
 document.getElementById("searchResult").innerHTML =
 
 `
-<h3>Resident Found ✅</h3>
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
 
-<p><b>Name:</b> ${found.name}</p>
+<h3 style="color:green;">
+Resident Found ✅
+</h3>
 
-<p><b>Phone:</b> ${found.phone}</p>
+<button onclick="closeSearch()"
+style="
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+cursor:pointer;
+">
+✖
+</button>
 
-<p><b>Building:</b> ${found.building}</p>
+</div>
 
-<p><b>Room:</b> ${found.room}</p>
+<p><b>👤 Name:</b> ${found.name}</p>
 
-<p><b>Status:</b> Occupied</p>
+<p><b>📱 Phone:</b> ${found.phone}</p>
+
+<p><b>🏢 Building:</b> ${found.building}</p>
+
+<p><b>🚪 Room:</b> ${found.room}</p>
+
+<p><b>🟢 Status:</b> Occupied</p>
 `;
 
 }
@@ -442,15 +464,34 @@ else{
 document.getElementById("searchResult").innerHTML =
 
 `
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
 <h3 style="color:red;">
-Resident Not Found
+Resident Not Found ❌
 </h3>
+
+<button onclick="closeSearch()"
+style="
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+cursor:pointer;
+">
+✖
+</button>
+
+</div>
 `;
 
 }
 
 }
-
 
 /* Enter Key Support */
 
@@ -519,6 +560,14 @@ localStorage.removeItem("activity");
 location.reload();
 
 }
+
+}
+function closeSearch(){
+
+document.getElementById("searchResult").style.display =
+"none";
+
+document.getElementById("searchGuest").value = "";
 
 }
 
