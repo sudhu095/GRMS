@@ -15,9 +15,14 @@ padding:20px;
 max-width:600px;
 margin:auto;
 background:white;
-padding:20px;
+padding:25px;
 border-radius:10px;
 box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+color:#003366;
 }
 
 input{
@@ -32,14 +37,15 @@ padding:12px;
 background:#003366;
 color:white;
 border:none;
+border-radius:5px;
 cursor:pointer;
 }
 
 #result{
 margin-top:20px;
-padding:15px;
 background:#eef4ff;
-border-radius:8px;
+padding:20px;
+border-radius:10px;
 }
 
 </style>
@@ -51,7 +57,9 @@ border-radius:8px;
 
 <h2>Search Guest</h2>
 
-<input type="text" id="searchName" placeholder="Enter Guest Name">
+<input type="text"
+id="search"
+placeholder="Enter Guest Name">
 
 <button onclick="searchGuest()">
 Search
@@ -65,32 +73,38 @@ Search
 
 function searchGuest(){
 
-let searchName =
-document.getElementById("searchName").value.toLowerCase();
+let name =
+document.getElementById("search").value;
 
 let guests =
 JSON.parse(localStorage.getItem("guests")) || [];
 
-let result =
-document.getElementById("result");
-
-let found =
-guests.find(guest =>
-guest.name.toLowerCase().trim() === searchName.trim()
+let found = guests.find(
+g => g.name.toLowerCase() ==
+name.toLowerCase()
 );
 
 if(found){
 
-result.innerHTML = `
-<h3>Guest Found</h3>
+document.getElementById("result").innerHTML =
+
+`
 <p><b>Name:</b> ${found.name}</p>
+
 <p><b>Phone:</b> ${found.phone}</p>
+
+<p><b>Building:</b> ${found.building}</p>
+
 <p><b>Room:</b> ${found.room}</p>
+
+<p><b>Status:</b> Occupied</p>
+
 `;
 
-}else{
+}
+else{
 
-result.innerHTML =
+document.getElementById("result").innerHTML =
 "<h3>Guest Not Found</h3>";
 
 }
@@ -98,6 +112,6 @@ result.innerHTML =
 }
 
 </script>
-
+<script src="common.js"></script>
 </body>
 </html>

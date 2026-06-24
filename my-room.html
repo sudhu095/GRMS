@@ -12,7 +12,7 @@ padding:20px;
 }
 
 .container{
-max-width:600px;
+max-width:650px;
 margin:auto;
 background:white;
 padding:30px;
@@ -28,14 +28,24 @@ margin-bottom:20px;
 
 .box{
 background:#eef4ff;
-padding:20px;
+padding:25px;
 border-radius:10px;
 margin-top:20px;
 }
 
 .box p{
 font-size:18px;
-margin:10px 0;
+margin:12px 0;
+}
+
+.status{
+color:green;
+font-weight:bold;
+}
+
+.paid{
+color:blue;
+font-weight:bold;
 }
 
 </style>
@@ -67,11 +77,25 @@ document.getElementById("roomBox").innerHTML =
 `
 <p><b>Resident:</b> ${resident.name}</p>
 
-<p><b>Building:</b> Royal Tower</p>
+<p><b>Phone:</b> ${resident.phone}</p>
+
+<p><b>Building:</b> ${resident.building}</p>
 
 <p><b>Room Number:</b> ${resident.room}</p>
 
-<p><b>Status:</b> Occupied</p>
+<p><b>Check In Date:</b> ${resident.checkin}</p>
+
+<p><b>ID Type:</b> ${resident.idType}</p>
+
+<p><b>Payment Status:</b>
+<span class="paid">Paid</span>
+</p>
+
+<p><b>Bill Amount:</b> ₹5000</p>
+
+<p><b>Room Status:</b>
+<span class="status">Occupied</span>
+</p>
 `;
 
 }
@@ -86,4 +110,4 @@ document.getElementById("roomBox").innerHTML =
 </script>
 
 </body>
-</html>s
+</html>

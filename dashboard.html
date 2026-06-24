@@ -253,11 +253,47 @@ Guest Room Management System (GRMS)
 <div id="currentDateTime"
 style="margin-top:10px;color:black;font-weight:bold;">
 </div>
+<div style="margin-top:15px;display:flex;gap:10px;justify-content:flex-end;">
+
+<input type="text"
+id="searchGuest"
+placeholder="Search Resident..."
+style="
+padding:10px;
+width:220px;
+border-radius:20px;
+border:1px solid #ccc;
+outline:none;
+">
+
+<button onclick="searchResident()"
+style="
+padding:10px 15px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:20px;
+cursor:pointer;
+">
+🔍
+</button>
+
+</div>
 
 </div>
 
 </header>
 <div class="dashboard">
+<div id="searchResult"
+style="
+display:none;
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+">
+</div>
 <div class="welcome-box">
 
 <h2>Welcome Back,sudhu👋</h2>
@@ -300,15 +336,7 @@ Manage rooms, residents, maintenance, inventory and reports.
 
 <h2>📋 Recent Activity</h2>
 
-<div class="activity-box">
-
-<p>✅ New Guest Added</p>
-
-<p>🏨 Room 101 Occupied</p>
-
-<p>🚪 Guest Checked Out</p>
-
-<p>📊 Report Generated</p>
+<div class="activity-box" id="activityBox">
 
 </div>
 
@@ -367,7 +395,93 @@ window.location.href="index.html";
 }
 
 }
+function searchResident(){
 
+let name =
+document.getElementById("searchGuest").value;
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+let found =
+guests.find(
+g => g.name.toLowerCase() ==
+name.toLowerCase()
+);
+
+if(found){
+
+document.getElementById("searchResult").style.display =
+"block";
+
+document.getElementById("searchResult").innerHTML =
+
+`
+<h3>Resident Found</h3>
+
+<p><b>Name:</b> ${found.name}</p>
+
+<p><b>Phone:</b> ${found.phone}</p>
+
+<p><b>Building:</b> ${found.building}</p>
+
+<p><b>Room:</b> ${found.room}</p>
+
+<p><b>Status:</b> Occupied</p>
+`;
+
+}
+else{
+
+document.getElementById("searchResult").style.display =
+"block";
+
+document.getElementById("searchResult").innerHTML =
+
+"<h3>Resident Not Found</h3>";
+
+}
+
+}
+
+const searchBox =
+document.getElementById("searchGuest");
+
+if(searchBox){
+
+searchBox.addEventListener("keyup", function(event){
+
+if(event.key === "Enter"){
+
+searchResident();
+
+}
+
+});
+
+}
+
+let activity =
+JSON.parse(localStorage.getItem("activity")) || [];
+
+let box =
+document.getElementById("activityBox");
+
+if(activity.length > 0){
+
+activity.reverse().forEach(function(item){
+
+box.innerHTML += "<p>" + item + "</p>";
+
+});
+
+}
+else{
+
+box.innerHTML =
+"<p>No Recent Activity</p>";
+
+}
 </script>
 
 </body>
