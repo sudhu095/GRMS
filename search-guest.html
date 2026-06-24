@@ -12,23 +12,27 @@ padding:20px;
 }
 
 .container{
-max-width:600px;
+max-width:650px;
 margin:auto;
 background:white;
 padding:25px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,0.15);
 }
 
 h2{
 text-align:center;
 color:#003366;
+margin-bottom:20px;
 }
 
 input{
 width:100%;
-padding:10px;
+padding:12px;
 margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
 }
 
 button{
@@ -37,8 +41,14 @@ padding:12px;
 background:#003366;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:8px;
 cursor:pointer;
+font-size:16px;
+margin-top:10px;
+}
+
+button:hover{
+background:#0055aa;
 }
 
 #result{
@@ -46,6 +56,18 @@ margin-top:20px;
 background:#eef4ff;
 padding:20px;
 border-radius:10px;
+display:none;
+}
+
+.close-btn{
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+cursor:pointer;
+float:right;
+width:auto;
 }
 
 </style>
@@ -55,11 +77,13 @@ border-radius:10px;
 
 <div class="container">
 
-<h2>Search Guest</h2>
+<h2>🔍 Search Guest</h2>
 
-<input type="text"
+<input
+type="text"
 id="search"
-placeholder="Enter Guest Name">
+placeholder="Enter Guest Name"
+autofocus>
 
 <button onclick="searchGuest()">
 Search
@@ -84,11 +108,23 @@ g => g.name.toLowerCase() ==
 name.toLowerCase()
 );
 
+document.getElementById("result").style.display =
+"block";
+
 if(found){
 
 document.getElementById("result").innerHTML =
 
 `
+<button class="close-btn"
+onclick="closeResult()">
+✖
+</button>
+
+<h3 style="color:green;">
+Resident Found
+</h3>
+
 <p><b>Name:</b> ${found.name}</p>
 
 <p><b>Phone:</b> ${found.phone}</p>
@@ -98,20 +134,51 @@ document.getElementById("result").innerHTML =
 <p><b>Room:</b> ${found.room}</p>
 
 <p><b>Status:</b> Occupied</p>
-
 `;
 
 }
 else{
 
 document.getElementById("result").innerHTML =
-"<h3>Guest Not Found</h3>";
+
+`
+<button class="close-btn"
+onclick="closeResult()">
+✖
+</button>
+
+<h3 style="color:red;">
+Resident Not Found
+</h3>
+`;
 
 }
 
 }
+
+function closeResult(){
+
+document.getElementById("result").style.display =
+"none";
+
+document.getElementById("search").value = "";
+
+}
+
+document.getElementById("search")
+.addEventListener("keyup", function(event){
+
+if(event.key === "Enter"){
+
+searchGuest();
+
+}
+
+});
 
 </script>
+
 <script src="common.js"></script>
+
 </body>
 </html>

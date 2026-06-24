@@ -209,6 +209,18 @@ document.getElementById("result").innerHTML =
 <p><b>Status:</b> Pending</p>
 `;
 
+let activity =
+JSON.parse(localStorage.getItem("activity")) || [];
+
+activity.push(
+"🛠 Maintenance Ticket : Room " + room
+);
+
+localStorage.setItem(
+"activity",
+JSON.stringify(activity)
+);
+
 document.getElementById("ticketTable").innerHTML +=
 
 `

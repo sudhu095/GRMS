@@ -189,6 +189,18 @@ localStorage.setItem(
 JSON.stringify(guests)
 );
 
+let activity =
+JSON.parse(localStorage.getItem("activity")) || [];
+
+activity.push(
+"✅ New Resident Added : " + guest.name
+);
+
+localStorage.setItem(
+"activity",
+JSON.stringify(activity)
+);
+
 alert("Resident Saved Successfully");
 
 document.getElementById("name").value="";

@@ -181,6 +181,17 @@ localStorage.setItem(
 "history",
 JSON.stringify(history)
 );
+let activity =
+JSON.parse(localStorage.getItem("activity")) || [];
+
+activity.push(
+"🚪 Checked Out : " + guestName
+);
+
+localStorage.setItem(
+"activity",
+JSON.stringify(activity)
+);
 
 document.getElementById("result").innerHTML =
 
