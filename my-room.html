@@ -47,19 +47,43 @@ margin:10px 0;
 
 <h2>My Assigned Room</h2>
 
-<div class="box">
+<div class="box" id="roomBox">
 
-<p><b>Resident:</b> Rahul Kumar</p>
+</div>
+
+</div>
+
+<script>
+
+let guests =
+JSON.parse(localStorage.getItem("guests")) || [];
+
+if(guests.length > 0){
+
+let resident = guests[0];
+
+document.getElementById("roomBox").innerHTML =
+
+`
+<p><b>Resident:</b> ${resident.name}</p>
 
 <p><b>Building:</b> Royal Tower</p>
 
-<p><b>Room Number:</b> 101</p>
+<p><b>Room Number:</b> ${resident.room}</p>
 
 <p><b>Status:</b> Occupied</p>
+`;
 
-</div>
+}
+else{
 
-</div>
+document.getElementById("roomBox").innerHTML =
+
+"<h3>No Room Assigned</h3>";
+
+}
+
+</script>
 
 </body>
-</html>
+</html>s

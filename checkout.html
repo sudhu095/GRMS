@@ -4,6 +4,7 @@
 <title>Check Out</title>
 
 <style>
+
 body{
 font-family:Arial;
 background:#f4f6f9;
@@ -19,10 +20,18 @@ border-radius:10px;
 box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
-input{
+h2{
+text-align:center;
+margin-bottom:20px;
+color:#003366;
+}
+
+input,select{
 width:100%;
 padding:10px;
 margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
@@ -32,7 +41,16 @@ background:#345d85;
 color:white;
 border:none;
 cursor:pointer;
+border-radius:5px;
 }
+
+#result{
+margin-top:20px;
+padding:15px;
+background:#eef4ff;
+border-radius:8px;
+}
+
 </style>
 
 </head>
@@ -41,21 +59,52 @@ cursor:pointer;
 
 <div class="container">
 
-<h2>Guest Check-Out</h2>
+<h2>Resident Check-Out</h2>
 
-<input type="text" id="guestName" placeholder="Guest Name">
+<input type="text"
+id="guestName"
+placeholder="Resident Name">
 
-<input type="number" id="roomNo" placeholder="Room Number">
+<input type="number"
+id="roomNo"
+placeholder="Room Number">
 
-<input type="date" id="checkoutDate">
+<input type="date"
+id="checkoutDate">
 
-</button>
+<input type="number"
+id="bill"
+placeholder="Bill Amount">
 
-<div id="billBox" style="margin-top:20px;"></div>
+<select id="paymentMethod">
+<option value="">Payment Method</option>
+<option>Cash</option>
+<option>UPI</option>
+<option>Paytm</option>
+<option>Card</option>
+</select>
+
+<select id="paymentStatus">
+<option value="">Payment Status</option>
+<option>Paid</option>
+<option>Pending</option>
+</select>
+
+<select id="feedback">
+
+<option value="">Select Feedback</option>
+<option>Excellent</option>
+<option>Good</option>
+<option>Average</option>
+<option>Poor</option>
+
+</select>
 
 <button onclick="checkOut()">
 Check Out
 </button>
+
+<div id="result"></div>
 
 </div>
 
@@ -68,6 +117,21 @@ document.getElementById("guestName").value;
 
 let roomNo =
 document.getElementById("roomNo").value;
+
+let checkoutDate =
+document.getElementById("checkoutDate").value;
+
+let bill =
+document.getElementById("bill").value;
+
+let paymentMethod =
+document.getElementById("paymentMethod").value;
+
+let paymentStatus =
+document.getElementById("paymentStatus").value;
+
+let feedback =
+document.getElementById("feedback").value;
 
 let guests =
 JSON.parse(localStorage.getItem("guests")) || [];
@@ -96,10 +160,55 @@ JSON.stringify(newGuests)
 );
 
 if(found){
-alert("Check Out Successful");
+
+let history =
+JSON.parse(localStorage.getItem("history")) || [];
+
+history.push({
+
+name: guestName,
+room: roomNo,
+bill: bill,
+paymentMethod: paymentMethod,
+paymentStatus: paymentStatus,
+feedback: feedback,
+checkoutDate: checkoutDate,
+status: "Checked Out"
+
+});
+
+localStorage.setItem(
+"history",
+JSON.stringify(history)
+);
+
+document.getElementById("result").innerHTML =
+
+`
+<h3>Check Out Successful</h3>
+
+<p><b>Resident:</b> ${guestName}</p>
+
+<p><b>Room:</b> ${roomNo}</p>
+
+<p><b>Bill Amount:</b> ₹${bill}</p>
+
+<p><b>Payment:</b> ${paymentMethod}</p>
+
+<p><b>Status:</b> ${paymentStatus}</p>
+
+<p><b>Feedback:</b> ${feedback}</p>
+
+<p><b>Check Out Date:</b> ${checkoutDate}</p>
+
+`;
+
 }
 else{
-alert("Guest Not Found");
+
+document.getElementById("result").innerHTML =
+"<h3>Resident Not Found</h3>";
+
 }
 
 }

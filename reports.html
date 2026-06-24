@@ -12,7 +12,7 @@ padding:20px;
 }
 
 .container{
-max-width:700px;
+max-width:750px;
 margin:auto;
 background:white;
 padding:20px;
@@ -31,6 +31,25 @@ padding:15px;
 margin:10px 0;
 background:#eaf2ff;
 border-left:5px solid #003366;
+font-size:18px;
+font-weight:bold;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#003366;
+color:white;
+border:none;
+border-radius:5px;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+background:#0055aa;
 }
 
 </style>
@@ -43,24 +62,36 @@ border-left:5px solid #003366;
 <h1>📊 Grand Royal Hotel Reports</h1>
 
 <div class="report-box">
-Total Rooms : <span id="totalRooms">20</span>
+🏨 Total Rooms : <span id="totalRooms">20</span>
 </div>
 
 <div class="report-box">
-Total Guests : <span id="totalGuests">0</span>
+👥 Total Residents : <span id="totalGuests">0</span>
 </div>
 
 <div class="report-box">
-Occupied Rooms : <span id="occupiedRooms">0</span>
+🟢 Occupied Rooms : <span id="occupiedRooms">0</span>
 </div>
 
 <div class="report-box">
-Available Rooms : <span id="availableRooms">0</span>
+⚪ Available Rooms : <span id="availableRooms">0</span>
 </div>
 
 <div class="report-box">
-Occupancy Rate : <span id="occupancyRate">0%</span>
+📈 Occupancy Rate : <span id="occupancyRate">0%</span>
 </div>
+
+<div class="report-box">
+💰 Total Revenue : ₹<span id="revenue">0</span>
+</div>
+
+<div class="report-box">
+🚪 Checked Out Residents : <span id="checkedOut">0</span>
+</div>
+
+<button onclick="window.print()">
+Print Report
+</button>
 
 </div>
 
@@ -68,6 +99,9 @@ Occupancy Rate : <span id="occupancyRate">0%</span>
 
 let guests =
 JSON.parse(localStorage.getItem("guests")) || [];
+
+let history =
+JSON.parse(localStorage.getItem("history")) || [];
 
 let totalGuests = guests.length;
 
@@ -89,6 +123,20 @@ Math.round((occupiedRooms / 20) * 100);
 
 document.getElementById("occupancyRate").innerText =
 occupancyRate + "%";
+
+let revenue = 0;
+
+for(let i=0; i<history.length; i++){
+
+revenue += Number(history[i].bill);
+
+}
+
+document.getElementById("revenue").innerText =
+revenue;
+
+document.getElementById("checkedOut").innerText =
+history.length;
 
 </script>
 

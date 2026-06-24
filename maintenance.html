@@ -12,7 +12,7 @@ padding:20px;
 }
 
 .container{
-max-width:600px;
+max-width:800px;
 margin:auto;
 background:white;
 padding:20px;
@@ -30,6 +30,9 @@ input,textarea,select{
 width:100%;
 padding:10px;
 margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+box-sizing:border-box;
 }
 
 button{
@@ -39,6 +42,12 @@ background:#003366;
 color:white;
 border:none;
 cursor:pointer;
+border-radius:5px;
+font-size:16px;
+}
+
+button:hover{
+background:#0055aa;
 }
 
 #result{
@@ -46,6 +55,32 @@ margin-top:20px;
 padding:15px;
 background:#eef4ff;
 border-radius:8px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+}
+
+th{
+background:#003366;
+color:white;
+}
+
+.deleteBtn{
+background:red;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:5px;
+cursor:pointer;
 }
 
 </style>
@@ -64,11 +99,34 @@ placeholder="Resident Name">
 
 <input type="text"
 id="room"
-placeholder="Assigned Room">
+placeholder="Room Number">
+
+<select id="issueType">
+
+<option value="">Select Issue Type</option>
+<option>AC Problem</option>
+<option>Water Leakage</option>
+<option>Electricity Issue</option>
+<option>Fan Problem</option>
+<option>TV Problem</option>
+<option>WiFi Issue</option>
+<option>Cleaning Required</option>
+<option>Other</option>
+
+</select>
+
+<select id="priority">
+
+<option value="">Select Priority</option>
+<option>High</option>
+<option>Medium</option>
+<option>Low</option>
+
+</select>
 
 <textarea
 id="issue"
-placeholder="Enter Problem">
+placeholder="Describe the problem">
 </textarea>
 
 <button onclick="submitTicket()">
@@ -76,6 +134,28 @@ Submit Ticket
 </button>
 
 <div id="result"></div>
+
+<h2>Maintenance History</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Ticket ID</th>
+<th>Room</th>
+<th>Issue</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="ticketTable">
+</tbody>
+
+</table>
 
 </div>
 
@@ -89,21 +169,82 @@ document.getElementById("resident").value;
 let room =
 document.getElementById("room").value;
 
+let issueType =
+document.getElementById("issueType").value;
+
+let priority =
+document.getElementById("priority").value;
+
 let issue =
 document.getElementById("issue").value;
 
+if(
+resident=="" ||
+room=="" ||
+issueType=="" ||
+priority==""
+){
+alert("Please fill all fields");
+return;
+}
+
+let ticketId =
+"MNT" + Math.floor(Math.random()*10000);
+
 document.getElementById("result").innerHTML =
+
 `
 <h3>Ticket Raised Successfully</h3>
+
+<p><b>Ticket ID:</b> ${ticketId}</p>
 
 <p><b>Resident:</b> ${resident}</p>
 
 <p><b>Room:</b> ${room}</p>
 
-<p><b>Issue:</b> ${issue}</p>
+<p><b>Issue:</b> ${issueType}</p>
+
+<p><b>Priority:</b> ${priority}</p>
 
 <p><b>Status:</b> Pending</p>
 `;
+
+document.getElementById("ticketTable").innerHTML +=
+
+`
+<tr>
+
+<td>${ticketId}</td>
+
+<td>${room}</td>
+
+<td>${issueType}</td>
+
+<td>${priority}</td>
+
+<td>Pending</td>
+
+<td>
+<button class="deleteBtn"
+onclick="deleteTicket(this)">
+Delete
+</button>
+</td>
+
+</tr>
+`;
+
+document.getElementById("resident").value="";
+document.getElementById("room").value="";
+document.getElementById("issueType").value="";
+document.getElementById("priority").value="";
+document.getElementById("issue").value="";
+
+}
+
+function deleteTicket(button){
+
+button.parentElement.parentElement.remove();
 
 }
 
