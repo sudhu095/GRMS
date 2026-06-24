@@ -13,31 +13,55 @@ padding:20px;
 
 h1{
 text-align:center;
-margin-bottom:30px;
+margin-bottom:20px;
 color:#003366;
+}
+
+.legend{
+display:flex;
+justify-content:center;
+gap:30px;
+margin-bottom:30px;
+font-weight:bold;
+font-size:18px;
 }
 
 .rooms{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:15px;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:20px;
 }
 
 .room{
 padding:20px;
 text-align:center;
-border-radius:10px;
+border-radius:15px;
 color:white;
 font-weight:bold;
 font-size:18px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+.room:hover{
+transform:scale(1.05);
+cursor:pointer;
 }
 
 .available{
-background:green;
+background:#28a745;
 }
 
 .occupied{
-background:red;
+background:#dc3545;
+}
+
+.room small{
+display:block;
+margin-top:10px;
+font-size:14px;
+font-weight:normal;
+color:white;
 }
 
 </style>
@@ -46,11 +70,24 @@ background:red;
 
 <body>
 
-<h1>Room Status</h1>
+<h1>🏨 Room Status</h1>
+
+<div class="legend">
+
+<span style="color:green;">
+🟢 Available
+</span>
+
+<span style="color:red;">
+🔴 Occupied
+</span>
+
+</div>
 
 <div class="rooms" id="roomsContainer">
 
 </div>
+
 <script>
 
 let guests =
@@ -69,17 +106,41 @@ document.createElement("div");
 
 roomDiv.classList.add("room");
 
+let guest =
+guests.find(
+g => g.room == i
+);
+
 if(occupiedRooms.includes(i.toString())){
 
 roomDiv.classList.add("occupied");
 
-}else{
+roomDiv.innerHTML =
+
+`
+Room ${i}
+
+<small>
+${guest.name}
+</small>
+`;
+
+}
+else{
 
 roomDiv.classList.add("available");
 
-}
+roomDiv.innerHTML =
 
-roomDiv.innerText = "Room " + i;
+`
+Room ${i}
+
+<small>
+Available
+</small>
+`;
+
+}
 
 container.appendChild(roomDiv);
 
