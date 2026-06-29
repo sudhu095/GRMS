@@ -16,16 +16,3 @@ button.click();
 }
 
 });
-
-function toggleSidebar(){
-
-let sidebar =
-document.getElementById("sidebar");
-
-if(sidebar){
-
-sidebar.classList.toggle("hide");
-
-}
-
-}

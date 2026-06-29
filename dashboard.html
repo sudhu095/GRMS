@@ -173,28 +173,6 @@ text-align:center;
 padding:15px;
 font-size:14px;
 }
-.menu-btn{
-background:#2563eb;
-color:white;
-border:none;
-padding:10px 15px;
-font-size:22px;
-border-radius:8px;
-cursor:pointer;
-margin-right:15px;
-}
-
-.menu-btn:hover{
-background:#003366;
-}
-
-.sidebar{
-transition:0.3s;
-}
-
-.sidebar.hide{
-margin-left:-250px;
-}
 
 </style>
 </head>
@@ -203,7 +181,7 @@ margin-left:-250px;
 
 <div class="container">
 
-<div class="sidebar" id="sidebar">
+<div class="sidebar">
 
 <h2>🏨 GRMS</h2>
 
@@ -227,10 +205,6 @@ margin-left:-250px;
 <div class="main-content">
 
 <header class="topbar">
-<button class="menu-btn"
-onclick="toggleSidebar()">
-☰
-</button>
 
 <div>
 
@@ -596,12 +570,7 @@ document.getElementById("searchResult").style.display =
 document.getElementById("searchGuest").value = "";
 
 }
-function toggleSidebar(){
 
-document.getElementById("sidebar")
-.classList.toggle("hide");
-
-}
 </script>
 
 </body>
